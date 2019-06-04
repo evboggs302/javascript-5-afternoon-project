@@ -15,6 +15,10 @@
 */
 
 // Code here
+function CarFactory(make, model) {
+  this.make = make;
+  this.model = model;
+}
 
 ////////// PROBLEM 2 //////////
 
@@ -34,13 +38,14 @@ function Employee(name, email, hireDate) {
 */
 
 // Code here
+var bob = new Employee("Bob", "bob@gmail.com", "01-02-98");
 
 ////////// PROBLEM 3 //////////
 
 // Do not edit the code below.
 
-var prius = new Car('Toyota', 'Prius', 2011);
-var mustang = new Car('Ford', 'Mustang', 2013);
+var prius = new Car("Toyota", "Prius", 2011);
+var mustang = new Car("Ford", "Mustang", 2013);
 prius.moveCar(); // Increments prius' move property by 10. Returns the new move property.
 mustang.moveCar(); // Increments mustang' move property by 10. Returns the new move property.
 
@@ -58,11 +63,21 @@ mustang.moveCar(); // Increments mustang' move property by 10. Returns the new m
 
 // Code here
 
+function Car(make, model, year) {
+  this.make = make;
+  this.model = model;
+  this.year = year;
+  this.move = 0;
+  this.moveCar = function() {
+    return (this.move += 10);
+  };
+}
+
 ////////// PROBLEM 4 //////////
 
 /*
   Here we have a constructor function named Movie that takes in 3 parameters:
-    name (a string), genre (a string), and rating (a number withing 1-100 that has been averaged out from previous given ratings).
+    name (a string), genre (a string), and rating (a number within 1-100 that has been averaged out from previous given ratings).
   Write a prototype method for the Movie constructor function called changeRating.
   This method should take in a number as a parameter that will be a new rating.
   Find the average between the old rating and the new rating.
@@ -75,6 +90,10 @@ function Movie(name, genre, rating) {
   this.rating = rating;
 }
 
+Movie.prototype.changeRating = newRating => {
+  return (this.rating += newRating / 2);
+};
+
 // Code here
 
 ////////// PROBLEM 5 //////////
@@ -85,12 +104,26 @@ function Movie(name, genre, rating) {
 
 // Code here
 
+function User(name, age, email, savedPosts) {
+  this.name = name;
+  this.age = age;
+  this.email = email;
+  this.savedPosts = savedPosts;
+}
+
+User.prototype.addSavedPost = function(id, title, rating) {
+  this.savedPosts.push({ id, title, rating });
+};
+
 ////////// PROBLEM 6 //////////
 
 // You will be using the constructor function you just created in problem 5.
 // Write a prototype method for the User constructor function named removeSavedPost that will take in one number parameter representing the post id. Use this id to find and remove the matching object in the savedPosts array.
 
 // Code here
+User.prototype.removeSavedPost = function(id) {
+  this.savedPosts = this.savedPosts.filter(e => e.id !== id);
+};
 
 ////////// PROBLEM 7 //////////
 
@@ -98,3 +131,11 @@ function Movie(name, genre, rating) {
 // Write a prototype method for the User constructor function named changePostRating that will take in two number parameters. The first will be an id (a number) and the second will be the new rating (a number). Use the id to find the matching object in the savedPosts array. Once you find the matching object, update it's rating score with the new rating parameter.
 
 // Code here
+User.prototype.changePostRating = function(id, newRating) {
+  for (let i = 0; i < this.savedPosts.length; i++) {
+    if (this.savedPosts[i].id === id) {
+      this.savedPosts[i].rating = newRating;
+      return this.savedPosts;
+    }
+  }
+};
