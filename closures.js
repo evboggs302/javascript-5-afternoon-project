@@ -175,6 +175,12 @@ function secretNumber() {
 
   return {
     // Code here
+    addToSecret: num => {
+      return (secret += num);
+    },
+    takeAwayFromSecret: num => {
+      return (secret -= num);
+    }
   };
 }
 
@@ -198,9 +204,13 @@ function secretNumber() {
 
 function timeOutCounter() {
   for (var i = 0; i <= 5; i++) {
-    setTimeout(function() {
-      console.log(i);
-    }, i * 1000);
+    function repeat(i) {
+      setTimeout(function() {
+        console.log(i);
+      }, i * 1000);
+    }
+    repeat(i);
   }
 }
+
 timeOutCounter();
