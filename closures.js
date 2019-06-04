@@ -116,9 +116,12 @@ function motivation(firstname, lastname) {
   var welcomeText = "You're doing awesome, keep it up";
 
   // code message function here.
+  var message = function() {
+    return welcomeText + " " + firstname + " " + lastname + ".";
+  };
 
   //Uncommment this to return the value of your message function
-  //return message;
+  return message;
 }
 
 var greeting = motivation("Billy", "Bob"); // 'You're doing awesome keep it up Billy Bob.
@@ -152,6 +155,9 @@ var module = (function() {
   // outside our lexical scope
   return {
     // Code here.
+    publicMethod: () => {
+      return privateMethod();
+    }
   };
 })();
 
